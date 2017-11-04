@@ -15,7 +15,7 @@
     "autoload": {
         "psr-4": {
             "": "src/Kohana",
-            "Eleggua\\": "src/Wkhtmltopdf"
+            "Eleggua\\Wkhtmltopdf\\": "src/Wkhtmltopdf"
         }
     },
     "minimum-stability": "stable"

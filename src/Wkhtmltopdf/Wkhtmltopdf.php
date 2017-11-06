@@ -173,29 +173,29 @@ class Wkhtmltopdf
 
     /**
      * @param string $orientation
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setOrientation($orientation)
     {
         // TODO: Add invalid value exception
         $this->cmd->orientation = $orientation;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param string $pageSize
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setPageSize($pageSize)
     {
         // TODO: Add invalid value exception
         $this->cmd->pageSize = $pageSize;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param bool $param
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setToc($param)
     {
@@ -204,22 +204,22 @@ class Wkhtmltopdf
         } else {
             $this->cmd->toc = "";
         }
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param int $copies
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setCopies($copies)
     {
         $this->cmd->copies = $copies;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param bool $param
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setDisableAutoScaling($param)
     {
@@ -228,12 +228,12 @@ class Wkhtmltopdf
         } else {
             $this->cmd->autoScaling = "";
         }
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param bool $param
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setGrayscale($param)
     {
@@ -242,84 +242,84 @@ class Wkhtmltopdf
         } else {
             $this->cmd->grayscale = "";
         }
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param string $footerHtml
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setFooterHtml($footerHtml)
     {
         $this->cmd->footerHtml = " --footer-html " . $footerHtml;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param int $marginTop
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setMarginTop($marginTop)
     {
         $this->cmd->marginTop = $marginTop;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param int $marginBottom
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setMarginBottom($marginBottom)
     {
         $this->cmd->marginBottom = $marginBottom;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param int $marginLeft
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setMarginLeft($marginLeft)
     {
         $this->cmd->marginLeft = $marginLeft;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param int $marginRight
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setMarginRight($marginRight)
     {
         $this->cmd->marginRight = $marginRight;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param string $pageHeight
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setPageHeight($pageHeight)
     {
         $this->cmd->pageHeight = $pageHeight;
-        return $this->cmd;
+        return $this;
     }
 
 
     /**
      * @param string $pageWidth
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setPageWidth($pageWidth)
     {
         $this->cmd->pageWidth = $pageWidth;
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * Set all page margins
      * @param int $margin
-     * @return CmdBuilder
+     * @return Wkhtmltopdf
      */
     public function setMargins($margin)
     {
@@ -329,14 +329,16 @@ class Wkhtmltopdf
             = $this->cmd->marginRight
             = $margin;
 
-        return $this->cmd;
+        return $this;
     }
 
     /**
      * @param string $html
+     * @return Wkhtmltopdf
      */
     public function setHtml($html)
     {
         $this->html = $html;
+        return $this;
     }
 }

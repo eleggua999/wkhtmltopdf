@@ -1,24 +1,15 @@
 <?php
-/**
- * @copyright C UAB NFQ Technologies 2017
- *
- * This Software is the property of NFQ Technologies
- * and is protected by copyright law – it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * Contact UAB NFQ Technologies:
- * E-mail: info@nfq.lt
- * http://www.nfq.lt
- *
- */
 
 namespace Eleggua\Wkhtmltopdf;
 
+/**
+ * Class PdfRenderer
+ * @package Eleggua\Wkhtmltopdf
+ */
 class PdfRenderer
 {
+    const PATH = Wkhtmltopdf::PATH;
+
     /**
      * available page orientations
      */
@@ -41,7 +32,7 @@ class PdfRenderer
     public function generateFilename($extension)
     {
         do {
-            $filename = Wkhtmltopdf::PATH . mt_rand() . '.' . $extension;
+            $filename = static::PATH . mt_rand() . '.' . $extension;
         } while (file_exists($filename));
 
         return $filename;
@@ -64,9 +55,10 @@ class PdfRenderer
 
         $temp_pdf_path = $this->generateFilename('pdf');
 
-        $cmd .= ' > ' . $temp_pdf_path . ' 2>/dev/null';
+        $cmd .= ' - > ' . $temp_pdf_path;
 
         exec($cmd, $output, $return_value);
+        $response['cmd'] = $cmd;
         if ($return_value) {
             $response['return'] = $return_value;
             $response['stderr'] = implode(';', $output);
@@ -80,7 +72,7 @@ class PdfRenderer
             return $response;
         }
 
-        unlink($temp_pdf_path);
+        //unlink($temp_pdf_path);
         return $response;
     }
 
@@ -127,8 +119,8 @@ class PdfRenderer
             $stderr = isset($content['stderr']) ? $content['stderr'] : 'no stderr';
             $stdout = isset($content['stdout']) ? $content['stdout'] : 'no stdout';
             $return = isset($content['return']) ? $content['return'] : 'no return';
-            $this->log(strstr('WKHTMLTOPDF failed stderr: :stderr; stdout: :stdout; return: :return; cmd: :cmd',
-                array(':stderr' => $stderr, ':stdout' => $stdout, ':return' => $return, ':cmd' => $command)));
+            $this->log(strtr('WKHTMLTOPDF failed stderr: :stderr; stdout: :stdout; return: :return; cmd: :cmd',
+                array(':stderr' => $stderr, ':stdout' => $stdout, ':return' => $return, ':cmd' => $content['cmd'])));
             throw $e;
         }
 

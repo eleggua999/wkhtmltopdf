@@ -8,7 +8,7 @@ namespace Eleggua\Wkhtmltopdf;
  */
 class CmdBuilder
 {
-    const BINARY = '../../bin/wkhtmltopdf-0.12.2.1';
+    const BINARY = '/../../bin/wkhtmltopdf-0.12.2.1';
 
     /**
      * @var string
@@ -80,53 +80,72 @@ class CmdBuilder
      */
     private $command;
 
-    public function __construct()
-    {
-        $this->start();
-    }
-
+    /**
+     * @return CmdBuilder
+     */
     public function buildOrientation()
     {
-        $this->command = " --orientation " . $this->orientation;
+        $this->command .= " --orientation " . $this->orientation;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildPageSize()
     {
         $this->command .= " --page-size " . $this->pageSize;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildToc()
     {
         $this->command .= $this->toc;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildCopies()
     {
         $this->command .= " --copies " . $this->copies;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildDisableAutoScaling()
     {
         $this->command .= $this->autoScaling;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildGrayscale()
     {
         $this->command .= $this->grayscale;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildFooterHtml()
     {
         $this->command .= $this->footerHtml;
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildPage()
     {
         if ($this->pageWidth == 0 || $this->pageHeight == 0) {
@@ -140,6 +159,9 @@ class CmdBuilder
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function buildMargins()
     {
         $this->command .=
@@ -151,9 +173,13 @@ class CmdBuilder
         return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function build()
     {
         return $this
+            ->start()
             ->buildDisableAutoScaling()
             ->buildCopies()
             ->buildOrientation()
@@ -161,22 +187,33 @@ class CmdBuilder
             ->buildPage()
             ->buildGrayscale()
             ->buildMargins()
-        ;
+            ->end()
+            ;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function start()
     {
-        $this->command = static::BINARY . ' --image-quality 100';
+        $this->command .= dirname(__FILE__) . static::BINARY . ' ';
+        return $this;
     }
 
+    /**
+     * @return CmdBuilder
+     */
     public function end()
     {
-        $this->command .= ' "%input%" -';
+        $this->command .= ' "%input%" ';
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getCommand()
     {
-        $this->end();
         return $this->command;
     }
 }

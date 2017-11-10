@@ -58,12 +58,12 @@ class CmdBuilder
     /**
      * @var int
      */
-    public $marginLeft = 10;
+    public $marginLeft = 0;
 
     /**
      * @var int
      */
-    public $marginRight = 10;
+    public $marginRight = 0;
 
     /**
      * @var string

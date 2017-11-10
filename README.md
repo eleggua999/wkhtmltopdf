@@ -10,5 +10,5 @@ About: [https://wkhtmltopdf.org/](https://wkhtmltopdf.org/)
 ## Install
 
 ```bash
-$ composer require "eleggua999/wkhtmltopdf:1.0"
+$ composer require "eleggua999/wkhtmltopdf:1.1"
 ```

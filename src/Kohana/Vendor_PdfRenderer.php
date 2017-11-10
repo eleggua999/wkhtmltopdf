@@ -7,6 +7,8 @@ use Eleggua\Wkhtmltopdf\PdfRenderer;
  */
 class Vendor_PdfRenderer extends PdfRenderer
 {
+	const PATH = \Vendor_Wkhtmltopdf::PATH;
+
     /**
      * {@inheritdoc}
      */
